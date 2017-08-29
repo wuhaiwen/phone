@@ -3,8 +3,10 @@ package com.whw.phoneinterception.fragment;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
@@ -20,6 +22,7 @@ import android.view.ViewGroup;
 import com.whw.phoneinterception.Constant;
 import com.whw.phoneinterception.R;
 import com.whw.phoneinterception.adapter.RecordAdapter;
+import com.whw.phoneinterception.myinterface.RequestPermissionType;
 import com.whw.phoneinterception.util.SharePreferencesUtils;
 import com.whw.phoneinterception.util.ToastUtil;
 
@@ -97,8 +100,39 @@ public class RecordFragment extends Fragment {
     private void initView() {
         data.add("1");
         data.add("1");
-        recordAdapter = new RecordAdapter(data, getActivity());
+        recordAdapter = new RecordAdapter(data, getActivity(),getActivity());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(recordAdapter);
+    }
+
+    /**
+     * 注册权限申请回调
+     * @param requestCode 申请码
+     * @param permissions 申请的权限
+     * @param grantResults 结果
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)
+    {
+        switch (requestCode)
+        {
+            case  RequestPermissionType.REQUEST_CODE_ASK_CALL_PHONE:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                {
+                    //获得电话号码然后用意图启动拨号界面，不会直接拨出去
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_DIAL);
+                    intent.setData(Uri.parse("tel:" + 10000));
+                    getActivity().startActivity(intent);
+                }
+                else
+                {
+                    // Permission DeniedT
+                    ToastUtil.show(getActivity(),"没有权限");
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
     }
 }

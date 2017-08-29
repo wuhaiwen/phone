@@ -1,14 +1,21 @@
 package com.whw.phoneinterception.adapter;
 
+import android.Manifest;
+import android.app.Activity;
+import android.app.Dialog;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.ContactsContract;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.telephony.SmsManager;
@@ -27,6 +34,8 @@ import android.widget.Toast;
 
 import com.whw.phoneinterception.R;
 import com.whw.phoneinterception.myinterface.OnItemClickListener;
+import com.whw.phoneinterception.myinterface.RequestPermissionType;
+import com.whw.phoneinterception.util.DialogUtil;
 import com.whw.phoneinterception.util.ToastUtil;
 
 import java.util.ArrayList;
@@ -45,12 +54,14 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.MyViewHold
     LayoutInflater inflater;
     Context context;
     ButtonListener listener;
+    Activity activity;
 
     OnItemClickListener onItemClickListener = null;
 
-    public RecordAdapter(List<String> data, Context context) {
+    public RecordAdapter(List<String> data, Context context,Activity activity) {
         this.data = data;
         this.context = context;
+        this.activity = activity;
         inflater = LayoutInflater.from(context);
     }
 
@@ -88,6 +99,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.MyViewHold
 
         @Bind(R.id.tv_phone_num)
         TextView tv_phone_num;
+
         public MyViewHolder(final View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -122,10 +134,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.MyViewHold
                 public boolean onMenuItemClick(MenuItem item) {
                     switch (item.getItemId()) {
                         case R.id.action_dial_back:
-                            //获得电话号码然后用意图启动拨号界面，不会直接拨出去
-                            Intent intent = new Intent();
-                            intent.setAction(Intent.ACTION_DIAL);
-                            context.startActivity(intent);
+                            requestPermission();
                             break;
                         case R.id.action_add_black_list:
 
@@ -137,7 +146,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.MyViewHold
                             break;
                         case R.id.action_send_message:
 
-                            ToastUtil.show(context, "发送成功"+position);
+                            ToastUtil.show(context, "发送成功" + position);
 
                             break;
 
@@ -148,4 +157,55 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.MyViewHold
             menu.show();
         }
     }
+
+
+    private void requestPermission()
+    {
+        //判断Android版本是否大于23
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+        {
+            int checkCallPhonePermission = ContextCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE);
+            if (checkCallPhonePermission != PackageManager.PERMISSION_GRANTED)
+            {
+                DialogInterface.OnClickListener dialogOnclicListener = new DialogInterface.OnClickListener()
+                {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        switch (which)
+                        {
+                            case Dialog.BUTTON_POSITIVE:
+                                ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.CALL_PHONE},
+                                        RequestPermissionType.REQUEST_CODE_ASK_CALL_PHONE);
+                                break;
+                            case Dialog.BUTTON_NEGATIVE:
+                                break;
+                            case Dialog.BUTTON_NEUTRAL:
+                                break;
+                        }
+                    }
+                };
+                DialogUtil.showConfirm(context, "申请权限", "是否允许获取打电话权限？", dialogOnclicListener, dialogOnclicListener);
+                return;
+            }
+            else
+            {
+                callPhone();
+            }
+        }
+        else
+        {
+            callPhone();
+        }
+    }
+
+    public void callPhone(){
+
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:" + 10000));
+        context.startActivity(intent);
+    }
+
 }
