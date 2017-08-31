@@ -80,7 +80,7 @@ public class ContactsAdapter extends BaseAdapter {
             InputStream input = ContactsContract.Contacts.openContactPhotoInputStream(resolver, uri);
             Bitmap contactPhoto = BitmapFactory.decodeStream(input);
             viewHolder.contacts_photo.setImageBitmap(contactPhoto);
-            Log.d(Constant.TAG,contacts.getName()+" "+contacts.getPhoto_id());
+//            Log.d(Constant.TAG,contacts.getName()+" "+contacts.getPhoto_id());
         }else
             viewHolder.contacts_photo.setImageBitmap(bitmap);
         return convertView;

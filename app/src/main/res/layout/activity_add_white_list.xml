@@ -6,12 +6,12 @@
     android:layout_height="match_parent"
     tools:context="com.whw.phoneinterception.activity.AddWhiteListActivity">
 
-    <include layout="@layout/layout_loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:id="@+id/include" />
+    <!--<include layout="@layout/layout_loading"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:id="@+id/include" />-->
 
     <ListView
         android:id="@+id/contacts_list"
@@ -22,15 +22,15 @@
         android:layout_centerVertical="true"
       />
 
-    <!--<ImageView-->
-        <!--android:id="@+id/loading"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="@drawable/loading_animation"-->
-        <!--android:layout_below="@+id/include"-->
-        <!--android:layout_alignLeft="@+id/include"-->
-        <!--android:layout_alignStart="@+id/include"-->
-        <!--android:layout_marginTop="63dp" />-->
+    <ImageView
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/loading_animation"
+        android:layout_below="@+id/include"
+        android:layout_alignLeft="@+id/include"
+        android:layout_alignStart="@+id/include"
+        android:layout_marginTop="63dp" />
 
 
 </RelativeLayout>

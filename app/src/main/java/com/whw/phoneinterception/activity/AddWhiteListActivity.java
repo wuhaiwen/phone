@@ -33,10 +33,10 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class AddWhiteListActivity extends BaseActivity {
-//    @Bind(R.id.loading)
+    @Bind(R.id.loading)
     ImageView imageView;
-    @Bind(R.id.loading_view)
-    LoadingView loadingView;
+//    @Bind(R.id.loading_view)
+//    LoadingView loadingView;
 
     ArrayList<Contacts> list;
     Context context;
@@ -52,7 +52,7 @@ public class AddWhiteListActivity extends BaseActivity {
         setContentView(R.layout.activity_add_white_list);
         ButterKnife.bind(this);
         context = this;
-//        loadAnimation(imageView);
+        loadAnimation(imageView);
         if (requestPermission(Manifest.permission.READ_CONTACTS, this, getApplicationContext())) {
             intent_service = new Intent(this, ContactsService.class);
             this.startService(intent_service);
@@ -75,7 +75,7 @@ public class AddWhiteListActivity extends BaseActivity {
                 } else {
                     showToast("未找到联系人");
                 }
-                loadingView.setVisibility(View.GONE);
+                imageView.setVisibility(View.GONE);
             }
             context.stopService(intent_service);
             context.unregisterReceiver(contactsReceiver);

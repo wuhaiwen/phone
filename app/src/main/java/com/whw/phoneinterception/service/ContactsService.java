@@ -6,8 +6,9 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.IBinder;
+import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
-import  android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.util.Log;
 
 import com.whw.phoneinterception.Constant;
@@ -26,6 +27,7 @@ import java.util.TreeSet;
 public class ContactsService extends Service {
 
     private ArrayList<Contacts> contactsList = new ArrayList<>();
+
     public ContactsService() {
 
     }
@@ -42,7 +44,7 @@ public class ContactsService extends Service {
         return null;
     }
 
-    class ContactsThread extends Thread{
+    class ContactsThread extends Thread {
         @Override
         public void run() {
             super.run();
@@ -69,23 +71,67 @@ public class ContactsService extends Service {
                 String contacts_name = cursor.getString(2);
                 String photo_uri = cursor.getString(3);
                 long photo_id = cursor.getLong(4);
-                Contacts contacts = new Contacts(id,contacts_name,number,photo_uri,photo_id);
+                Contacts contacts = new Contacts(id, contacts_name, number, photo_uri, photo_id);
                 contactsList.add(contacts);
-                Log.d(Constant.TAG,contacts_name+" "+photo_id+" "+id);
+//                Log.d(Constant.TAG, contacts_name + " " + photo_id + " " + id + " " + number);
             }
             cursor.close();
-            TreeSet<Long> treeSet = new TreeSet<>();
-            for (Contacts contacts:contactsList
-                 ) {
-                treeSet.add(contacts.getId());
-            }
-            for (Iterator iterator = treeSet.iterator(); iterator.hasNext();) {
-                long id = (long) iterator.next();
-            }
             Intent intent = new Intent(Constant.CONTACTS_LIST);
-            intent.putExtra(Constant.CONTACTS_LIST,contactsList);
+            intent.putExtra(Constant.CONTACTS_LIST, contactsList);
             //获取联系人列表，发送广播
             sendBroadcast(intent);
+            printContacts();
         }
+    }
+
+    public void printContacts() {
+        //生成ContentResolver对象
+        ContentResolver contentResolver = getContentResolver();
+
+        // 获得所有的联系人
+        /*Cursor cursor = contentResolver.query(
+                ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
+         */
+        //这段代码和上面代码是等价的，使用两种方式获得联系人的Uri
+        Cursor cursor = contentResolver.query(Uri.parse("content://com.android.contacts/contacts"), null, null, null, null);
+
+        // 循环遍历
+        if (cursor.moveToFirst()) {
+
+            int idColumn = cursor.getColumnIndex(ContactsContract.Contacts._ID);
+            int displayNameColumn = cursor
+                    .getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
+
+            while (cursor.moveToNext()) {
+                // 获得联系人的ID
+                String contactId = cursor.getString(idColumn);
+                // 获得联系人姓名
+                String displayName = cursor.getString(displayNameColumn);
+
+                // 查看联系人有多少个号码，如果没有号码，返回0
+                int phoneCount = cursor
+                        .getInt(cursor
+                                .getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
+                if (phoneCount > 0) {
+                    // 获得联系人的电话号码列表
+                    Cursor phoneCursor = getContentResolver().query(
+                            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                            null,
+                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID
+                                    + "=" + contactId, null, null);
+                    if (phoneCursor.moveToFirst()) {
+                        while (phoneCursor.moveToNext()){
+                            //遍历所有的联系人下面所有的电话号码
+                            String phoneNumber = phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                            Log.d(Constant.TAG, displayName + " " + phoneNumber);
+                        }
+                    }
+                    phoneCursor.close();
+                }
+
+            }
+            cursor.close();
+        }
+
     }
 }
