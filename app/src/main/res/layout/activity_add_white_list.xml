@@ -13,14 +13,24 @@
         android:layout_centerVertical="true"
         android:id="@+id/include" />
 
-    <ImageView
-        android:id="@+id/loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/loading_animation"
-        android:layout_below="@+id/include"
-        android:layout_alignLeft="@+id/include"
-        android:layout_alignStart="@+id/include"
-        android:layout_marginTop="63dp" />
+    <ListView
+        android:id="@+id/contacts_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+      />
+
+    <!--<ImageView-->
+        <!--android:id="@+id/loading"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/loading_animation"-->
+        <!--android:layout_below="@+id/include"-->
+        <!--android:layout_alignLeft="@+id/include"-->
+        <!--android:layout_alignStart="@+id/include"-->
+        <!--android:layout_marginTop="63dp" />-->
+
 
 </RelativeLayout>

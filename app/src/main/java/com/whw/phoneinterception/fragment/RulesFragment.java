@@ -66,8 +66,8 @@ public class RulesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), AddWhiteListActivity.class);
-//                startActivity(intent);
-                requestPermission();
+                startActivity(intent);
+//                requestPermission();
 //                queryContacts();
 
             }

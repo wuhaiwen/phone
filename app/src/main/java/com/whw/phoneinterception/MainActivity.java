@@ -8,7 +8,9 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
+import com.whw.phoneinterception.activity.BaseActivity;
 import com.whw.phoneinterception.fragment.RecordFragment;
 import com.whw.phoneinterception.fragment.RulesFragment;
 
@@ -18,13 +20,14 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @Bind(R.id.tab_layout)
     TabLayout tabLayout;
     @Bind(R.id.view_pager)
     ViewPager viewPager;
 
+    View view;
     private List<Fragment> fragmentList = new ArrayList<>();
     private long exitTime = 0;
 
@@ -86,4 +89,5 @@ public class MainActivity extends AppCompatActivity {
         }
         super.onBackPressed();
     }
+
 }
