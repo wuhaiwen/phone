@@ -42,7 +42,7 @@ public class ContactsAdapter extends BaseAdapter {
         this.context = context;
         inflater = LayoutInflater.from(context);
         resolver = context.getContentResolver();
-        bitmap = BitmapFactory.decodeResource(context.getResources(),R.drawable.contacts);
+        bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.contacts);
     }
 
     @Override
@@ -64,7 +64,7 @@ public class ContactsAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.layout_contacts_item, parent,false);
+            convertView = inflater.inflate(R.layout.layout_contacts_item, parent, false);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
         } else {
@@ -72,16 +72,21 @@ public class ContactsAdapter extends BaseAdapter {
         }
         Contacts contacts = data.get(position);
         viewHolder.contacts_name.setText(contacts.getName());
-//        Uri uri = Uri.parse(contacts.getPhoto_uri());
-//        InputStream input = ContactsContract.Contacts.openContactPhotoInputStream(resolver, uri);
-//        Bitmap contactPhoto = BitmapFactory.decodeStream(input);
-        if(contacts.getPhoto_id()>0) {
-            Uri uri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, contacts.getId());
-            InputStream input = ContactsContract.Contacts.openContactPhotoInputStream(resolver, uri);
-            Bitmap contactPhoto = BitmapFactory.decodeStream(input);
-            viewHolder.contacts_photo.setImageBitmap(contactPhoto);
-//            Log.d(Constant.TAG,contacts.getName()+" "+contacts.getPhoto_id());
-        }else
+        if (contacts.getPhoto_id() > 0) {
+            Uri uri = null;
+            if (contacts.getPhoto_uri().endsWith("/photo")) {
+                uri = Uri.parse(contacts.getPhoto_uri().substring(0, contacts.getPhoto_uri().indexOf("/photo")));
+            } else
+                uri = Uri.parse(contacts.getPhoto_uri());
+            try {
+                InputStream input = ContactsContract.Contacts.openContactPhotoInputStream(resolver, uri);
+                Bitmap contactPhoto = BitmapFactory.decodeStream(input);
+                viewHolder.contacts_photo.setImageBitmap(contactPhoto);
+            } catch (IllegalArgumentException e) {
+                viewHolder.contacts_photo.setImageBitmap(bitmap);
+            }
+//            Log.d(Constant.TAG, contacts.getName() + " " + uri.toString() + " " + contacts.getPhoto_uri());
+        } else
             viewHolder.contacts_photo.setImageBitmap(bitmap);
         return convertView;
     }

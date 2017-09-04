@@ -2,6 +2,7 @@ package com.whw.phoneinterception;
 
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -20,7 +21,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends AppCompatActivity {
 
     @Bind(R.id.tab_layout)
     TabLayout tabLayout;
@@ -45,6 +46,7 @@ public class MainActivity extends BaseActivity {
         tabAdapter = new TabAdapter(getSupportFragmentManager());
         viewPager.setAdapter(tabAdapter);
         tabLayout.setupWithViewPager(viewPager);
+        viewPager.setCurrentItem(1);
     }
 
     class TabAdapter extends FragmentStatePagerAdapter {

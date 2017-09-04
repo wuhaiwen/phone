@@ -73,7 +73,7 @@ public class ContactsService extends Service {
                 long photo_id = cursor.getLong(4);
                 Contacts contacts = new Contacts(id, contacts_name, number, photo_uri, photo_id);
                 contactsList.add(contacts);
-//                Log.d(Constant.TAG, contacts_name + " " + photo_id + " " + id + " " + number);
+//                Log.d(Constant.TAG, contacts_name + " " + photo_id + " " + id + " " + number+" "+photo_uri);
             }
             cursor.close();
             Intent intent = new Intent(Constant.CONTACTS_LIST);
@@ -128,10 +128,8 @@ public class ContactsService extends Service {
                     }
                     phoneCursor.close();
                 }
-
             }
             cursor.close();
         }
-
     }
 }

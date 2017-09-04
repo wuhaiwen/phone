@@ -58,7 +58,7 @@ public class RecordFragment extends Fragment {
         ButterKnife.bind(this, view);
         initView();
         SharePreferencesUtils.setValue(getActivity(), "wu", "haiwen");
-        Log.d(Constant.TAG, SharePreferencesUtils.getValue(getActivity(), "wu"));
+//        Log.d(Constant.TAG, SharePreferencesUtils.getValue(getActivity(), "wu"));
         if (ContextCompat.checkSelfPermission(getActivity(),
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {

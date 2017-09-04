@@ -6,10 +6,12 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
+import android.support.annotation.LayoutRes;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -22,12 +24,48 @@ import com.whw.phoneinterception.Constant;
 import com.whw.phoneinterception.R;
 import com.whw.phoneinterception.myinterface.RequestPermissionType;
 
-public class BaseActivity extends AppCompatActivity {
+import butterknife.ButterKnife;
+
+public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(getLayoutResId());
+        ButterKnife.bind(this);
+        work();
+        startActivityAnimation();
     }
+
+
+    //重写返回键
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==KeyEvent.KEYCODE_BACK){
+            finish();
+            finishActivityAnimation();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+
+    protected abstract @LayoutRes
+    int getLayoutResId();
+
+    protected void initToolBar(Toolbar toolbar,String title){
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(title);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                finishActivityAnimation();
+            }
+        });
+    }
+    protected void initView(){}
+    protected void work(){}
 
     public void showToast(String info) {
         Toast.makeText(this, info, Toast.LENGTH_SHORT).show();

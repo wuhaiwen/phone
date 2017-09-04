@@ -1,20 +1,12 @@
 package com.whw.phoneinterception.activity;
 
 import android.Manifest;
-import android.app.ActivityManager;
-import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
-import android.graphics.drawable.AnimationDrawable;
-import android.net.Uri;
-import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -24,8 +16,6 @@ import com.whw.phoneinterception.R;
 import com.whw.phoneinterception.adapter.ContactsAdapter;
 import com.whw.phoneinterception.bean.Contacts;
 import com.whw.phoneinterception.service.ContactsService;
-import com.whw.phoneinterception.util.ToastUtil;
-import com.whw.phoneinterception.widget.LoadingView;
 
 import java.util.ArrayList;
 
@@ -45,12 +35,14 @@ public class AddWhiteListActivity extends BaseActivity {
     @Bind(R.id.contacts_list)
     ListView contact_list;
 
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+
     private ContactsAdapter contactsAdapter;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_white_list);
-        ButterKnife.bind(this);
+    protected void work() {
+        super.work();
         context = this;
         loadAnimation(imageView);
         if (requestPermission(Manifest.permission.READ_CONTACTS, this, getApplicationContext())) {
@@ -59,7 +51,15 @@ public class AddWhiteListActivity extends BaseActivity {
             IntentFilter filter = new IntentFilter(Constant.CONTACTS_LIST);
             registerReceiver(contactsReceiver, filter);
         }
+        initToolBar(toolbar,"添加白名单");
     }
+
+    @Override
+    protected int getLayoutResId() {
+        return R.layout.activity_add_white_list;
+    }
+
+
 
     /**
      * 接受联系人的广播
@@ -70,7 +70,7 @@ public class AddWhiteListActivity extends BaseActivity {
             list = (ArrayList<Contacts>) intent.getSerializableExtra(Constant.CONTACTS_LIST);
             if (list != null) {
                 if (list.size() > 0) {
-                    contactsAdapter = new ContactsAdapter(list,context);
+                    contactsAdapter = new ContactsAdapter(list, context);
                     contact_list.setAdapter(contactsAdapter);
                 } else {
                     showToast("未找到联系人");
@@ -83,9 +83,16 @@ public class AddWhiteListActivity extends BaseActivity {
     };
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        printLog("destory");
+    }
+
+
+    @Override
     protected void onPause() {
         super.onPause();
-
+        printLog("pause");
 //        unregisterReceiver(contactsReceiver);
     }
 
