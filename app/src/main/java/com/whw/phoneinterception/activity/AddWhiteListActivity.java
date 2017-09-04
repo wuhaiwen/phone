@@ -1,14 +1,19 @@
 package com.whw.phoneinterception.activity;
 
 import android.Manifest;
+import android.animation.ObjectAnimator;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.whw.phoneinterception.Constant;
@@ -51,14 +56,14 @@ public class AddWhiteListActivity extends BaseActivity {
             IntentFilter filter = new IntentFilter(Constant.CONTACTS_LIST);
             registerReceiver(contactsReceiver, filter);
         }
-        initToolBar(toolbar,"添加白名单");
+        initToolBar(toolbar, "添加白名单");
+//        showToolbar(contact_list,toolbar,context);
     }
 
     @Override
     protected int getLayoutResId() {
         return R.layout.activity_add_white_list;
     }
-
 
 
     /**
@@ -74,6 +79,7 @@ public class AddWhiteListActivity extends BaseActivity {
                     contact_list.setAdapter(contactsAdapter);
                 } else {
                     showToast("未找到联系人");
+
                 }
                 imageView.setVisibility(View.GONE);
             }
@@ -95,6 +101,7 @@ public class AddWhiteListActivity extends BaseActivity {
         printLog("pause");
 //        unregisterReceiver(contactsReceiver);
     }
+
 
     //    @Override
 //    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

@@ -15,6 +15,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.whw.phoneinterception.Constant;
 import com.whw.phoneinterception.R;
 import com.whw.phoneinterception.bean.Contacts;
@@ -79,13 +80,12 @@ public class ContactsAdapter extends BaseAdapter {
             } else
                 uri = Uri.parse(contacts.getPhoto_uri());
             try {
-                InputStream input = ContactsContract.Contacts.openContactPhotoInputStream(resolver, uri);
-                Bitmap contactPhoto = BitmapFactory.decodeStream(input);
-                viewHolder.contacts_photo.setImageBitmap(contactPhoto);
+                Picasso.with(context).load(uri).into(viewHolder.contacts_photo);
             } catch (IllegalArgumentException e) {
-                viewHolder.contacts_photo.setImageBitmap(bitmap);
+                Log.d(Constant.TAG,  "Exception" + uri.toString() + " " + contacts.getPhoto_uri());
+                Picasso.with(context).load(uri).into(viewHolder.contacts_photo);
             }
-//            Log.d(Constant.TAG, contacts.getName() + " " + uri.toString() + " " + contacts.getPhoto_uri());
+            Log.d(Constant.TAG, contacts.getName() + " " + uri.toString() + " " + contacts.getPhoto_uri());
         } else
             viewHolder.contacts_photo.setImageBitmap(bitmap);
         return convertView;
