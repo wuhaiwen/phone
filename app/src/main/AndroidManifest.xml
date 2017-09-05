@@ -38,9 +38,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
-
                 <category android:name="android.intent.category.DEFAULT" />
-
                 <action android:name="android.intent.action.PHONE_STATE" />
                 <action android:name="TelephonyManager.ACTION_PHONE_STATE_CHANGED" />
             </intent-filter>

@@ -59,41 +59,6 @@ public class RecordFragment extends Fragment {
         initView();
         SharePreferencesUtils.setValue(getActivity(), "wu", "haiwen");
 //        Log.d(Constant.TAG, SharePreferencesUtils.getValue(getActivity(), "wu"));
-        if (ContextCompat.checkSelfPermission(getActivity(),
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
-                    Manifest.permission.READ_CONTACTS)) {
-
-                // Show an expanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-
-            } else {
-
-                // No explanation needed, we can request the permission.
-
-                ActivityCompat.requestPermissions(getActivity(),
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        1);
-
-                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-                // app-defined int constant. The callback method gets the
-                // result of the request.
-            }
-        }
-        File path = getActivity().getExternalFilesDir("");
-        File file = Environment.getExternalStorageDirectory().getAbsoluteFile();
-        File file2 = new File(file,"hah");
-        if(!file2.exists()) {
-            try {
-                file2.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
         return view;
     }
 
