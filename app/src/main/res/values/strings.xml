@@ -3,4 +3,11 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="settings_white_list">White List</string>
+    <string name="settings_black_list">Black List</string>
+    <string name="settings_open_reject">Open Reject</string>
+    <string name="settings_msg_content">Message Content</string>
+    <string name="settings_no_disturb">Do Not Disturb</string>
+
 </resources>

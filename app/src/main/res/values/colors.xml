@@ -9,5 +9,11 @@
     <color name="black">#000000</color>
     <color name="lighter_gray">#EEEEEE</color>
     <color name="dark_gray">#707070</color>
+    <color name="transparent">#00000000</color>
+    <color name="light_gray">#DDDDDD</color>
 
+    <color name="background_color">#FFFFFF</color>
+    <color name="front_color">#EEEEEE</color>
+    <color name="text_color_deep">#000000</color>
+    <color name="text_color_light">#707070</color>
 </resources>

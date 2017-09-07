@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2008 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2008 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -16,21 +15,27 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="拦截规则">
-
+    <SwitchPreference
+        android:key="switch_reject"
+        android:summary="reject_style"
+        android:title="@string/settings_open_reject" />
     <PreferenceScreen
         android:key="device_lcd"
-        android:title="白名单"
-        android:summary="无" />
+        android:summary="无"
+        android:icon="@drawable/contacts"
+        android:title="白名单" />
     <PreferenceScreen
         android:key="device_tp"
-        android:title="黑名单"
-        android:summary="自定义" />
+        android:summary="自定义"
+        android:title="黑名单" />
 
     <PreferenceScreen
         android:key="device_camera_back"
-        android:title="短信设置"
-        android:summary="短信内容" />
+        android:summary="短信内容"
+        android:title="短信设置" />
 
+    <PreferenceScreen
+        android:layout="@layout/layout_contacts_item"/>
 
 
 </PreferenceScreen>

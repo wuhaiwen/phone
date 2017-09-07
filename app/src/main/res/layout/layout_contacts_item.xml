@@ -6,10 +6,10 @@
     android:orientation="horizontal">
 
     <com.whw.phoneinterception.widget.CricleImageView
-        android:layout_margin="8dp"
         android:id="@+id/photo_contacts"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_margin="8dp"
         app:srcCompat="@drawable/contacts" />
 
     <TextView
@@ -19,5 +19,16 @@
         android:layout_gravity="center_vertical"
         android:layout_weight="1"
         android:text="TextView" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/ic_add_black_24dp" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical" />
 
 </LinearLayout>

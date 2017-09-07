@@ -13,8 +13,13 @@ import android.util.Log;
 
 import com.whw.phoneinterception.Constant;
 import com.whw.phoneinterception.bean.Contacts;
+import com.whw.phoneinterception.util.ContactsSort;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.TreeSet;
@@ -77,6 +82,26 @@ public class ContactsService extends Service {
             }
             cursor.close();
             Intent intent = new Intent(Constant.CONTACTS_LIST);
+            ContactsSort sort = new ContactsSort();
+//            Arrays.sort(contactsList,0,contactsList.size(),sort);
+            Collections.sort(contactsList, new Comparator<Contacts>() {
+                @Override
+                public int compare(Contacts o1, Contacts o2) {
+                    String name1 = (String) o1.getName();
+                    String name2 = (String) o1.getName();
+                    char[] c1 = name1.toCharArray();
+                    char[] c2 = name2.toCharArray();
+                    for (int i = 0; i < (c1.length > c2.length ? c2.length : c1.length); i++) {
+                        if (c1[i] > c2[i]) {
+                            return 1;
+                        }
+                        if (c1[i] < c2[i]) {
+                            return -1;
+                        }
+                    }
+                    return c1.length > c2.length ? 1 : -1;
+                }
+            });
             intent.putExtra(Constant.CONTACTS_LIST, contactsList);
             //获取联系人列表，发送广播
             sendBroadcast(intent);

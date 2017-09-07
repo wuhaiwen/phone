@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="elevation">2dp</dimen>
+    <dimen name="layout_margin">4dp</dimen>
+    <dimen name="layout_padding">4dp</dimen>
+
+    <dimen name="text_size_large">18sp</dimen>
+    <dimen name="text_size_middle">12sp</dimen>
+    <dimen name="text_size_small">10sp</dimen>
+
+</resources>

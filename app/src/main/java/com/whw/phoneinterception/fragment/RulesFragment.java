@@ -42,8 +42,6 @@ public class RulesFragment extends Fragment {
 
 
     Context context;
-    @Bind(R.id.button)
-    Button button;
 
     public RulesFragment() {
         // Required empty public constructor
@@ -62,16 +60,16 @@ public class RulesFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_rules, container, false);
         ButterKnife.bind(this, view);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), AddWhiteListActivity.class);
-                startActivity(intent);
-//                requestPermission();
-//                queryContacts();
-
-            }
-        });
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getActivity(), AddWhiteListActivity.class);
+//                startActivity(intent);
+////                requestPermission();
+////                queryContacts();
+//
+//            }
+//        });
         return view;
     }
 
@@ -96,34 +94,34 @@ public class RulesFragment extends Fragment {
         context.startService(intent);
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        for (int i = 0; i < grantResults.length; i++) {
-
-//判断权限的结果，如果有被拒绝，就return
-
-            if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
-                ToastUtil.show(context,"reject");
-                if (!ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
-
-                        permissions[i])) {
-
-
-                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-
-                    Uri uri = Uri.fromParts("package", getActivity().getPackageName(), null);
-
-                    intent.setData(uri);
-                    ActivityManager activityManager = (ActivityManager) getActivity().getSystemService(Service.ACTIVITY_SERVICE);
-                    startActivityForResult(intent, 0);
-                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                        ToastUtil.show(context, "yes");
-                        queryContacts();
-                    } else
-                        ToastUtil.show(context, "no");
-                }
-            }
-        }
-    }
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        for (int i = 0; i < grantResults.length; i++) {
+//
+////判断权限的结果，如果有被拒绝，就return
+//
+//            if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
+//                ToastUtil.show(context,"reject");
+//                if (!ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
+//
+//                        permissions[i])) {
+//
+//
+//                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+//
+//                    Uri uri = Uri.fromParts("package", getActivity().getPackageName(), null);
+//
+//                    intent.setData(uri);
+//                    ActivityManager activityManager = (ActivityManager) getActivity().getSystemService(Service.ACTIVITY_SERVICE);
+//                    startActivityForResult(intent, 0);
+//                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                        ToastUtil.show(context, "yes");
+//                        queryContacts();
+//                    } else
+//                        ToastUtil.show(context, "no");
+//                }
+//            }
+//        }
+//    }
 }
