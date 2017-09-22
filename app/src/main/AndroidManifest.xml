@@ -19,9 +19,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MyTheme">
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity"></activity>
 
         <service
             android:name=".service.ContactsService"
@@ -44,7 +42,7 @@
 
         <activity
             android:name=".activity.AddWhiteListActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".activity.WhiteListActivity" />
         <activity android:name=".activity.SettingsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -52,6 +50,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.WhiteListActivity"
+            android:parentActivityName=".activity.SettingsActivity"></activity>
     </application>
 
 </manifest>

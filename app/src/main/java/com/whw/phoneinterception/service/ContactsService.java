@@ -148,7 +148,7 @@ public class ContactsService extends Service {
                         while (phoneCursor.moveToNext()){
                             //遍历所有的联系人下面所有的电话号码
                             String phoneNumber = phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-//                            Log.d(Constant.TAG, displayName + " " + phoneNumber);
+                            Log.d(Constant.TAG, displayName + " " + phoneNumber+" "+phoneCount);
                         }
                     }
                     phoneCursor.close();

@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">电话拦截</string>
+    <string name="settings_white_list">白名单设置</string>
+    <string name="settings_black_list">黑名单设置</string>
+    <string name="settings_open_reject">开启拦截</string>
+    <string name="settings_msg_content">短信内容</string>
+    <string name="settings_no_disturb">免打扰</string>
+    <string name="settings_reject_mode">拦截模式</string>
+    <string name="select_from_contacts">从联系人选择</string>
+    <string name="define_own">自定义</string>
+    <!--<string name="select_from_contacts"></string>-->
+    <!--<string name="select_from_contacts"></string>-->
 </resources>

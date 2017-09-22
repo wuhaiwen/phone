@@ -21,14 +21,19 @@
         android:text="TextView" />
 
     <ImageView
+        android:id="@+id/add_into_white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:background="@drawable/ic_add_black_24dp" />
 
     <CheckBox
+        android:id="@+id/checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical" />
+        android:layout_gravity="center_vertical"
+        android:clickable="false"
+        android:focusable="false"
+        android:visibility="gone" />
 
 </LinearLayout>

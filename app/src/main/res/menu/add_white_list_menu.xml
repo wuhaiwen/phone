@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_from_contacts"
+        android:title="@string/select_from_contacts"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_define_white_own"
+        android:title="@string/define_own"
+        app:showAsAction="always" />
+</menu>

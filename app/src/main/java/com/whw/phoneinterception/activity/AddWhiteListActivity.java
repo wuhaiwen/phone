@@ -77,6 +77,16 @@ public class AddWhiteListActivity extends BaseActivity {
                 if (list.size() > 0) {
                     contactsAdapter = new ContactsAdapter(list, context);
                     contact_list.setAdapter(contactsAdapter);
+                    contact_list.setOnLongClickListener(new View.OnLongClickListener() {
+                        @Override
+                        public boolean onLongClick(View view) {
+                            if(view.getId()==R.id.add_into_white)
+                                view.setVisibility(View.GONE);
+                            if (view.getId()==R.id.checkbox)
+                                view.setVisibility(View.VISIBLE);
+                            return false;
+                        }
+                    });
                 } else {
                     showToast("未找到联系人");
 
@@ -101,6 +111,7 @@ public class AddWhiteListActivity extends BaseActivity {
         printLog("pause");
 //        unregisterReceiver(contactsReceiver);
     }
+
 
 
     //    @Override

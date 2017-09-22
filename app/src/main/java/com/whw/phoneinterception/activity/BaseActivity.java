@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -164,6 +165,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         AnimationDrawable animationDrawable = (AnimationDrawable) imageView.getBackground();
         animationDrawable.start();
     }
+
+    //隐藏toolbar
+    public void hideToolBar() {
+    }
+
 
     public boolean requestPermission(String permission, Activity activity, Context context) {
         boolean isAllow;

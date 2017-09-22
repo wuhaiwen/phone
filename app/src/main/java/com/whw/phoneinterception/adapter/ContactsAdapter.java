@@ -85,7 +85,7 @@ public class ContactsAdapter extends BaseAdapter {
                 Log.d(Constant.TAG,  "Exception" + uri.toString() + " " + contacts.getPhoto_uri());
                 Picasso.with(context).load(uri).into(viewHolder.contacts_photo);
             }
-            Log.d(Constant.TAG, contacts.getName() + " " + uri.toString() + " " + contacts.getPhoto_uri());
+//            Log.d(Constant.TAG, contacts.getName() + " " + uri.toString() + " " + contacts.getPhoto_uri());
         } else
             viewHolder.contacts_photo.setImageBitmap(bitmap);
         return convertView;

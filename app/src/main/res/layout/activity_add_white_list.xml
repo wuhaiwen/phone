@@ -23,6 +23,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/include"
+        android:choiceMode="multipleChoiceModal"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <ImageView
