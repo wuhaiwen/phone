@@ -179,7 +179,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             if (checkCallPhonePermission != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(activity, new String[]{permission},
                         RequestPermissionType.REQUEST_CODE_ASK_CALL_PHONE);
-                return false;
+                return true;
             } else {
                 isAllow = true;
             }

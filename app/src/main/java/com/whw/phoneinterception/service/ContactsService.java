@@ -102,6 +102,7 @@ public class ContactsService extends Service {
                     return c1.length > c2.length ? 1 : -1;
                 }
             });
+            Collections.reverse(contactsList);
             intent.putExtra(Constant.CONTACTS_LIST, contactsList);
             //获取联系人列表，发送广播
             sendBroadcast(intent);

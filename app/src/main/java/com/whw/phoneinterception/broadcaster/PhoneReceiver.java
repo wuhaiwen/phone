@@ -32,7 +32,7 @@ public class PhoneReceiver extends BroadcastReceiver {
         TelephonyManager telephony = (TelephonyManager) context.getSystemService(
                 Context.TELEPHONY_SERVICE);
         int state = telephony.getCallState();
-
+        Log.i(TAG, "[Broadcast]=" + intent.getAction());
         switch (state) {
             case TelephonyManager.CALL_STATE_RINGING:
                 Log.i(TAG, "[Broadcast]等待接电话=" + phoneNumber);

@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,6 +23,7 @@ import com.whw.phoneinterception.R;
 import com.whw.phoneinterception.adapter.ContactsAdapter;
 import com.whw.phoneinterception.bean.Contacts;
 import com.whw.phoneinterception.service.ContactsService;
+import com.whw.phoneinterception.widget.RecycleViewDecoration;
 
 import java.util.ArrayList;
 
@@ -38,7 +41,7 @@ public class AddWhiteListActivity extends BaseActivity {
     Intent intent_service;
 
     @Bind(R.id.contacts_list)
-    ListView contact_list;
+    RecyclerView contact_list;
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
@@ -50,12 +53,14 @@ public class AddWhiteListActivity extends BaseActivity {
         super.work();
         context = this;
         loadAnimation(imageView);
-        if (requestPermission(Manifest.permission.READ_CONTACTS, this, getApplicationContext())) {
+        boolean isAllow = requestPermission(Manifest.permission.READ_CONTACTS, this, getApplicationContext());
+        if (isAllow) {
             intent_service = new Intent(this, ContactsService.class);
             this.startService(intent_service);
             IntentFilter filter = new IntentFilter(Constant.CONTACTS_LIST);
             registerReceiver(contactsReceiver, filter);
         }
+        requestPermission(Manifest.permission.READ_CONTACTS, this, getApplicationContext());
         initToolBar(toolbar, "添加白名单");
 //        showToolbar(contact_list,toolbar,context);
     }
@@ -75,6 +80,7 @@ public class AddWhiteListActivity extends BaseActivity {
             list = (ArrayList<Contacts>) intent.getSerializableExtra(Constant.CONTACTS_LIST);
             if (list != null) {
                 if (list.size() > 0) {
+                    contact_list.setLayoutManager(new LinearLayoutManager(AddWhiteListActivity.this));
                     contactsAdapter = new ContactsAdapter(list, context);
                     contact_list.setAdapter(contactsAdapter);
                     contact_list.setOnLongClickListener(new View.OnLongClickListener() {

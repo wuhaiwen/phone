@@ -1,5 +1,6 @@
 package com.whw.phoneinterception;
 
+import android.Manifest;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
@@ -54,6 +55,7 @@ public class MainActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("拦截记录");
 //        toolbar.setOnMenuItemClickListener(onMenuItemClick);
+//        requestPermission(Manifest.permission.READ_PHONE_STATE, this, getApplicationContext());
     }
 
     protected void initView() {

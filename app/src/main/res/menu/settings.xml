@@ -6,5 +6,5 @@
         android:icon="@drawable/loading_animation"
         android:orderInCategory="90"
         android:title="@string/settings"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
 </menu>

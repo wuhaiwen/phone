@@ -1,5 +1,6 @@
 package com.whw.phoneinterception.activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,6 +41,7 @@ public class WhiteListActivity extends BaseActivity {
         Intent intent = new Intent();
         switch (item.getItemId()){
             case R.id.action_from_contacts:
+                requestPermission(Manifest.permission.READ_CONTACTS, this, getApplicationContext());
                 intent.setClass(this,AddWhiteListActivity.class);
                 break;
             case R.id.action_define_black_own:
