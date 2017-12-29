@@ -10,5 +10,20 @@
     <string name="settings_msg_content">Message Content</string>
     <string name="settings_no_disturb">Do Not Disturb</string>
     <string name="settings_reject_mode">Reject Mode</string>
+    <string name="settings">settings</string>
+
+
+    <string-array name="entries_str">
+        <item >白菜</item>
+        <item >萝卜</item>
+        <item >豆芽</item>
+        <item >芹菜</item>
+    </string-array>
+    <string-array name="entries_values_str">
+        <item >baicai</item>
+        <item >luobu</item>
+        <item >douya</item>
+        <item >qincai</item>
+    </string-array>
 
 </resources>

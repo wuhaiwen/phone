@@ -1,27 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.whw.phoneinterception.MainActivity">
+    tools:context="com.whw.phoneinterception.activity.AddWhiteListActivity">
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tab_layout"
+    <include
+        android:id="@+id/include"
+        layout="@layout/layout_toolbar" />
+    <!--<include layout="@layout/layout_loading"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:id="@+id/include" />-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycleView"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:tabBackground="@color/main"
-        app:tabIndicatorColor="@color/white"
-        app:tabSelectedTextColor="@color/white"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        app:tabGravity="fill"
-        app:tabTextColor="@color/gray" />
+        android:layout_below="@+id/include"
+        android:choiceMode="multipleChoiceModal"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/view_pager"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tab_layout" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:background="@drawable/loading_animation" />
+    </FrameLayout>
 
 
-</RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>
